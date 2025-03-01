@@ -1,19 +1,20 @@
 import json
 from tkinter import messagebox
-import tkinter as tk  # Corrección
-from tkinter import ttk  # Corrección
+import tkinter as tk
+from tkinter import ttk
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno
 load_dotenv()
 
 CREDENTIALS_FILE = os.getenv("GOOGLE_SHEETS_CREDENTIALS_PATH")
 
-with open(CREDENTIALS_FILE, "r") as file:
+# EN .ENV -> GOOGLE_SHEETS_CREDENTIALS_PATH=credentials.json
+
+with open(CREDENTIALS_FILE, "r") as file: # Agregar (.env y credentials) dentro de app
     credentials_dict = json.load(file)
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -25,7 +26,7 @@ print("✅ Conectado a Google Sheets")
 SHEET_NAME = "TransformacionNumeroLoteria"
 sheet = client.open(SHEET_NAME).sheet1
 
-tk_root = tk.Tk()  # Ahora funcionará correctamente
+tk_root = tk.Tk()
 tk_root.title("Transformador de Números")
 tk_root.geometry("1000x600")
 tk_root.resizable(False, False)
